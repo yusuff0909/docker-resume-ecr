@@ -27,20 +27,20 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
       
     - name: Build the Docker image with tag
-      run: docker build . --file Dockerfile --tag ${{ secrets.ECR_REGISTRY }}/my-image-name:${{ github.run_number }}
+      run: docker build . --file Dockerfile --tag ${{ secrets.ECR_REGISTRY }}/docker-resume-ecr:${{ github.run_number }}
       
     - name: Build the Docker image (latest)
-      run: docker build . --file Dockerfile --tag ${{ secrets.ECR_REGISTRY }}/my-image-name:latest
+      run: docker build . --file Dockerfile --tag ${{ secrets.ECR_REGISTRY }}/docker-resume-ecr:latest
       
     - name: Push the Docker image with version tag
-      run: docker push ${{ secrets.ECR_REGISTRY }}/my-image-name:${{ github.run_number }}
+      run: docker push ${{ secrets.ECR_REGISTRY }}/docker-resume-ecr:${{ github.run_number }}
       
     - name: Push the Docker image with latest tag
-      run: docker push ${{ secrets.ECR_REGISTRY }}/my-image-name:latest
+      run: docker push ${{ secrets.ECR_REGISTRY }}/docker-resume-ecr:latest
 
 
 
-      
+
   # deploy:
   
   #   needs: build
@@ -56,7 +56,7 @@ jobs:
   #       script: |
   #         docker stop resume || echo ""
   #         docker rm resume || echo ""
-  #         docker run -d --name resume -p 8080:5001 ${{ secrets.REGISTRY_USERNAME }}/my-image-name:${{ github.run_number }}
+  #         docker run -d --name resume -p 8080:5001 ${{ secrets.REGISTRY_USERNAME }}/docker-resume-ecr:${{ github.run_number }}
         
       
     
